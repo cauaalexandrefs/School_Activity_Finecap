@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block center %}
+    
+<h2>Formulário de reserva</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Cadastrar" class="btn btn-success">
+</form>
+
+{% if form.errors %}
+    <p>Erro ao cadastrar</p>
+{% endif %}
+
+{% endblock %}
