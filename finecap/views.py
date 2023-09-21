@@ -6,7 +6,19 @@ from .forms import ReservaForm
 # Create your views here.
 
 def index(request):
-    reservas = Reservas.objects.all()
+    reservas = Reservas.objects.all().order_by('date')
+    if(request.GET.get('q')):
+        reservas = reservas.filter(nome_empresa__icontains=request.GET.get('q'))
+    if(request.GET.get('btnradio')):
+        reservas = reservas.filter(quitado=True)
+    if(request.GET.get('btnradio2')):
+        reservas = reservas.filter(quitado=False)
+    if(request.GET.get('valor')):
+        reservas = reservas.filter(stand__valor=request.GET.get('valor'))
+    if(request.GET.get('date')):
+        reservas = reservas.filter(date__date=request.GET.get('date'))    
+    
+
     total_reservas = Reservas.objects.count()
     context = {
         'reservas': reservas,
