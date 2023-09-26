@@ -9,7 +9,7 @@ def index(request):
     reservas = Reservas.objects.all().order_by('date')
     if(request.GET.get('q')):
         reservas = reservas.filter(nome_empresa__icontains=request.GET.get('q'))
-    if(request.GET.get('btnradio')):
+    if(request.GET.get('btnradio1')):
         reservas = reservas.filter(quitado=True)
     if(request.GET.get('btnradio2')):
         reservas = reservas.filter(quitado=False)
