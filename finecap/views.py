@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Reservas
 from .forms import ReservaForm
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 
@@ -18,6 +18,14 @@ def index(request):
     if(request.GET.get('date')):
         reservas = reservas.filter(date__date=request.GET.get('date'))    
     
+    paginator = Paginator(reservas, 5)
+    page = request.GET.get('page')
+    try:
+        reservas = paginator.page(page)
+    except PageNotAnInteger:
+        reservas = paginator.page(1)
+    except EmptyPage:
+        reservas = paginator.page(paginator.num_pages)
 
     total_reservas = Reservas.objects.count()
     context = {

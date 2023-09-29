@@ -93,8 +93,26 @@
             </td>
         </tr>
         {% endfor %}
-        
-        </tbody>
+      
+      </tbody>
     </table>
+    
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% if reservas.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ reservas.previous_page_number }}">Anterior</a></li>
+        {% endif %}
+        {% for i in reservas.paginator.page_range %}
+        {% if reservas.number == i %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if reservas.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ reservas.next_page_number }}">Próximo</a></li>
+        {% endif %}
+      </ul>
+    </nav>
 
 {% endblock %}
