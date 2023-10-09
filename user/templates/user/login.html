@@ -1,0 +1,24 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+<div id="main-content">
+    <form method="POST" class="form">
+        {% csrf_token %}
+            <div class="title"><h2>Bem-vindo,</h2><br><span>Faça o login para continuar.</span></div>
+            <input type="text" placeholder="Nome" name="username" id="username" class="input">
+            <input type="password" placeholder="Password" name="password" id="password" class="input">
+            <button class="button-confirm">Entrar</button>
+            <a href="{% url 'register' %}" class="button-register">Não tem conta? Cadastrar</a>
+    </form>
+</div>
+</body>
+</html>
